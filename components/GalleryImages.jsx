@@ -1,8 +1,6 @@
 import Image from "next/image"
 
-export default async function GalleryImages() {
-
-    const images = []
+export default async function GalleryImages({images}) {
 
     return (
         <div className="gallery-images">
