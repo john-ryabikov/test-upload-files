@@ -9,7 +9,7 @@ export async function GET (req) {
     const path = join(process.cwd(), 'public/main')
     const images = await fs.readdir(path)
 
-    if (!images) return NextResponse.json("Загрузите изображения")
+    if (!images) return
         
     return NextResponse.json(images)
 }
