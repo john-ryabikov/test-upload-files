@@ -1,0 +1,15 @@
+.gallery-images {
+    @include flex-row();
+    width: 80%;
+    height: 300px;
+    border: 1px solid gray;
+    padding: 10px;
+    margin-top: 60px;
+    &__empty {
+        display: inline-block;
+        font-size: 20px;
+        font-weight: 300;
+        color: gray;
+        text-align: center;
+    }
+}
