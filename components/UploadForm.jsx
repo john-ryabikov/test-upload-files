@@ -30,7 +30,7 @@ export default function UploadForm() {
             const data = new FormData()
             data.set("file", file)
 
-            await fetch(process.env.URL + "/api/upload", {
+            await fetch("http://localhost:3000/api/upload", {
                 method: "POST",
                 body: data
             }, {cache: 'no-cache'})
