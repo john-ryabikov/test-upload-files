@@ -30,7 +30,7 @@ export default function UploadForm() {
             const data = new FormData()
             data.set("file", file)
 
-            await fetch("https://test-upload-files.vercel.app/api/upload", {
+            await fetch(process.env.URL + "/api/upload", {
                 method: "POST",
                 body: data
             }, {cache: 'no-cache'})
