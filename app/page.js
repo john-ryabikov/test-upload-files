@@ -3,7 +3,7 @@ import GalleryImages from "@components/GalleryImages"
 
 export default async function LocalUpload() {
 
-    const res = await fetch("http://localhost:3000/api/images", {
+    const res = await fetch("https://test-upload-files.vercel.app/api/images", {
         cache: 'no-cache'
     })
     const images = await res.json()
