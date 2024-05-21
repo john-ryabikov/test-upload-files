@@ -3,7 +3,7 @@ import GalleryImages from "@components/GalleryImages"
 
 export default async function LocalUpload() {
 
-    const res = await fetch(process.env.URL + "/api/images", {
+    const res = await fetch(process.env.URL + "api/images", {
         cache: 'no-cache'
     })
     const images = await res.json()
