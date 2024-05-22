@@ -7,38 +7,38 @@ import Image from "next/image";
 
 export default function UploadForm() {
 
+    const [blob, setBlob] = useState(null);
     const [file, setFile] = useState(null)
-    // const [urlFile, setUrlFile] = useState("")
 
     const router = useRouter()
 
     const changeFile = (e) => {
         if (e.target.files) {
             const image = e.target.files[0]
-            // setUrlFile(URL.createObjectURL(image))
             setFile(image)
         }
     }
 
     const uploadFile = async (e) => {
         e.preventDefault()
-
+        
         try {
-            if (!file) {
-                return console.log("Загрузите файл")
-            }
-            
-            // const data = new FormData()
-            // data.set("file", file)
-
-            // await fetch(process.env.URL  + "/api/upload", {
-            //     method: "POST",
-            //     body: data
-            // }, {cache: 'no-cache'})
+            if (!file) return console.log("Загрузите файл")
 
             console.log(file)
-            router.refresh()
+
+            const response = await fetch(`https://test-upload-files.vercel.app/api/upload?filename=${file.name}`,
+                {
+                    method: 'POST',
+                    body: file,
+                },
+            )
+
+            const newBlob = await response.json()
+
+            setBlob(newBlob)
             setFile(null)
+            router.refresh()
 
         } catch (e) {
             console.log((e))
@@ -47,7 +47,6 @@ export default function UploadForm() {
 
     const deleteFile = () => {
         setFile(null)
-        // setUrlFile("")
         router.refresh()
     }
 
@@ -64,6 +63,7 @@ export default function UploadForm() {
                     name="image"
                     accept="image/*"
                     onChange={changeFile}
+                    required
                 />
             </div>
             {file && (

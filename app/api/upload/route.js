@@ -1,19 +1,19 @@
 import { NextResponse } from "next/server";
-import fs from "fs/promises"
-import { join } from "path"
+import { put } from '@vercel/blob';
+// import fs from "fs/promises"
+// import { join } from "path"
 
 // export const dynamic = 'force-dynamic';
 
 export async function POST(req) {
 
-    const data = await req.formData()
-    const file = data.get("file")
+    const { searchParams } = new URL(req.url);
 
-    const bytes = await file.arrayBuffer()
-    const buffer = Buffer.from(bytes)
+    const filename = searchParams.get('filename');
 
-    const path = join(process.cwd(), 'public/main', file.name)
-    await fs.writeFile(path, buffer)
+    const blob = await put(filename, req.body, {
+        access: 'public',
+      });
 
-    return NextResponse.json({ message: "Файл загружен"})
+    return NextResponse.json(blob)
 }
