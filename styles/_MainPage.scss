@@ -6,11 +6,18 @@
     &__cont {
         @include flex-column();
         width: 1100px;
+        @media only screen and (min-width: 0) and (max-width: 480px) {
+            width: 350px;
+        }
     }
     &__title {
         position: relative;
         font-size: 40px;
-        font-weight: 500;
+        font-weight: 700;
         text-align: center;
+        @media only screen and (min-width: 0) and (max-width: 480px) {
+            width: 100%;
+            font-size: 28px;
+        }
     }
 }

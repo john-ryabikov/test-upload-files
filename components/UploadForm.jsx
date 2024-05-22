@@ -1,16 +1,16 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 export default function UploadForm() {
 
-    const [blob, setBlob] = useState(null);
     const [file, setFile] = useState(null)
 
     const router = useRouter()
+    const inputFileRef = useRef(null);
 
     const changeFile = (e) => {
         if (e.target.files) {
@@ -27,16 +27,13 @@ export default function UploadForm() {
 
             console.log(file)
 
-            const response = await fetch(`https://test-upload-files.vercel.app/api/upload?filename=${file.name}`,
+            await fetch(`https://test-upload-files.vercel.app/api/upload?filename=${file.name}`,
                 {
                     method: 'POST',
-                    body: file,
-                },
+                    body: file
+                }
             )
 
-            const newBlob = await response.json()
-
-            setBlob(newBlob)
             setFile(null)
             router.refresh()
 
@@ -54,11 +51,12 @@ export default function UploadForm() {
         <form className="upload-form" onSubmit={uploadFile}>
             <div className="upload-form__label">
                 <div className="upload-form__label-img">
-                    <Image className="upload-form__label-img" priority src={"/img/UploadForm/file_upload_icon.svg"} width={60} height={80} alt="Upload Image"/>
+                    <Image priority src={"/img/UploadForm/file_upload_icon.svg"} width={30} height={50} alt="Upload Image"/>
                 </div>
                 <p className="upload-form__label-text">Загрузите изображение</p>
                 <input 
-                    className="upload-form__input" 
+                    className="upload-form__input"
+                    ref={inputFileRef} 
                     type="file" 
                     name="image"
                     accept="image/*"
