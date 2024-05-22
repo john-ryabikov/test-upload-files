@@ -17,7 +17,7 @@
         text-align: center;
     }
     &__img-cont {
-        position: relative;
+        @include flex-column();
         width: 320px;
         height: 320px;
         background-color: #d1d1d1;

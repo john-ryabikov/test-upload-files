@@ -30,7 +30,10 @@ export default function UploadForm() {
             await fetch(`https://test-upload-files.vercel.app/api/upload?filename=${file.name}`,
                 {
                     method: 'POST',
-                    body: file
+                    body: file,
+                    next: {
+                        cache: "no-store"
+                    }
                 }
             )
 

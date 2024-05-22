@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { list } from "@vercel/blob"
 
-export default async function GalleryImages({images}) {
+export default async function GalleryImages() {
 
     const { blobs } = await list()
 
@@ -12,10 +12,9 @@ export default async function GalleryImages({images}) {
             ) : (
                 <>
                     {blobs.map(( image, i ) => (
-                        <div className="gallery-images__img-cont">
+                        <div className="gallery-images__img-cont" key={i} >
                             <Image
                                 className="gallery-images__img" 
-                                key={i} 
                                 priority 
                                 src={image.url} 
                                 width={380} 
