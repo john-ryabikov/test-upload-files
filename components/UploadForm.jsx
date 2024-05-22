@@ -27,15 +27,16 @@ export default function UploadForm() {
             if (!file) {
                 return console.log("Загрузите файл")
             }
-            const data = new FormData()
-            data.set("file", file)
+            
+            // const data = new FormData()
+            // data.set("file", file)
 
-            await fetch("https://test-upload-files.vercel.app/api/upload", {
-                method: "POST",
-                body: data
-            }, {cache: 'no-cache'})
+            // await fetch(process.env.URL  + "/api/upload", {
+            //     method: "POST",
+            //     body: data
+            // }, {cache: 'no-cache'})
 
-            // console.log(file)
+            console.log(file)
             router.refresh()
             setFile(null)
 
