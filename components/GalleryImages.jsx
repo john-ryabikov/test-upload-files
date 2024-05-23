@@ -16,6 +16,6 @@ export default async function GalleryImages() {
 
 
     return (
-        <Images url={BASE_URL} images={images}/>
+        <Images images={images}/>
     )
 }
