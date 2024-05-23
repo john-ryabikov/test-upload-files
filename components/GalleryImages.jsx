@@ -1,13 +1,14 @@
 import Image from "next/image"
-import { list } from "@vercel/blob"
 
 export default async function GalleryImages() {
 
-    const { blobs } = await list()
+    const images = await fetch("https://test-upload-files.vercel.app/api/images", {
+        cache: "no-store"
+    })
 
     return (
         <div className="gallery-images">
-            {blobs.length === 0 ? (
+            {images.length === 0 ? (
                 <span className="gallery-images__empty">Здесь ничего нет</span>
             ) : (
                 <>

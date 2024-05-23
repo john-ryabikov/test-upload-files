@@ -1,13 +1,11 @@
 import { NextResponse } from "next/server";
-import fs from "fs/promises"
-import { join } from "path"
+import { list } from "@vercel/blob"
 
 export const dynamic = 'force-dynamic';
 
 export async function GET (req) {
 
-    const path = join(process.cwd(), 'public/main')
-    const images = await fs.readdir(path)
+    const { blobs } = await list()
         
-    return NextResponse.json(images)
+    return NextResponse.json(blobs)
 }
