@@ -39,7 +39,7 @@ export default function UploadForm() {
                     method: 'POST',
                     body: file,
                     next: {
-                        cache: "no-store"
+                        cache: "no-cache"
                     }
                 }
             )
