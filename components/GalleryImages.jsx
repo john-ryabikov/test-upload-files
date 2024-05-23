@@ -8,9 +8,7 @@ export default async function GalleryImages() {
     //     BASE_URL = "https://test-upload-files.vercel.app"
     // }
 
-    const blob = await fetch("https://test-upload-files.vercel.app/api/images", {
-        cache: "no-store"
-    })
+    const blob = await fetch("https://test-upload-files.vercel.app/api/images")
 
     const images = await blob.json()
 
