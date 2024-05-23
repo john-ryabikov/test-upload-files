@@ -15,7 +15,7 @@ export default async function GalleryImages() {
                 <span className="gallery-images__empty">Здесь ничего нет</span>
             ) : (
                 <>
-                    {blobs.map(( image, i ) => (
+                    {images.map(( image, i ) => (
                         <div className="gallery-images__img-cont" key={i} >
                             <Image
                                 className="gallery-images__img" 
