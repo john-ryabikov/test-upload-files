@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-export default function Images({images}) {
+export default async function Images({images}) {
 
     return (
         <div className={images.length === 0 ? "gallery-images gallery-images_empty" : "gallery-images"}>
