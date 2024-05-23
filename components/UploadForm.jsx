@@ -32,6 +32,8 @@ export default function UploadForm() {
                 BASE_URL = "https://test-upload-files.vercel.app"
             }
 
+            console.log(BASE_URL)
+
             await fetch(`${BASE_URL}/api/upload?filename=${file.name}`,
                 {
                     method: 'POST',
