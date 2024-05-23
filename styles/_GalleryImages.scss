@@ -1,16 +1,22 @@
 .gallery-images {
     @include flex-row();
     width: 100%;
+    height: auto;
     border: 1px solid rgb(216, 216, 216);
     border-radius: 10px;
     padding: 10px;
     margin-top: 60px;
+    &_empty {
+        height: 320px;
+    }
     @media only screen and (min-width: 0) and (max-width: 480px) {
         @include flex-column();
         justify-content: flex-start;
     }
-    &__empty {
-        display: inline-block;
+    &__empty-text {
+        @include flex-column();
+        width: 100%;
+        height: 100%;
         font-size: 20px;
         font-weight: 300;
         color: gray;
@@ -20,11 +26,43 @@
         @include flex-column();
         width: 320px;
         height: 320px;
-        background-color: #d1d1d1;
+        box-shadow: 1px 1px 25px -6px rgba(34, 60, 80, 0.12);
         overflow: hidden;
         border-radius: 10px;
+        margin-right: 20px;
+        padding: 8px;
+        &:last-child {
+            margin-right: 0;
+        }
         @media only screen and (min-width: 0) and (max-width: 480px) {
+            margin-right: 0;
             margin-bottom: 20px;
+            &:last-child {
+                margin-bottom: 0;
+            }
         }
     }
+    &__img-load {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        width: 30px;
+        height: 30px;
+        border: 5px solid #d4d4d4;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+    }
 }
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+} 

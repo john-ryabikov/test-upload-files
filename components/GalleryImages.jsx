@@ -1,8 +1,14 @@
-import Image from "next/image"
+import Images from "./Images"
 
 export default async function GalleryImages() {
 
-    const blob = await fetch("https://test-upload-files.vercel.app/api/images", {
+    let BASE_URL = "http://localhost:3000"
+
+    if (process.env.VERCEL_ENV === "production") {
+        BASE_URL = "https://test-upload-files.vercel.app"
+    }
+
+    const blob = await fetch(BASE_URL + "/api/images", {
         cache: "no-store"
     })
 
@@ -10,25 +16,6 @@ export default async function GalleryImages() {
 
 
     return (
-        <div className="gallery-images">
-            {images.length === 0 ? (
-                <span className="gallery-images__empty">Здесь ничего нет</span>
-            ) : (
-                <>
-                    {images.map(( image, i ) => (
-                        <div className="gallery-images__img-cont" key={i} >
-                            <Image
-                                className="gallery-images__img" 
-                                priority 
-                                src={image.url} 
-                                width={380} 
-                                height={240} 
-                                alt={"Image" + i}
-                            />
-                        </div>
-                    ))}
-                </>
-            )}
-        </div>
+        <Images url={BASE_URL} images={images}/>
     )
 }

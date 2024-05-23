@@ -1,10 +1,10 @@
-import { Manrope } from "next/font/google";
+import { Golos_Text } from "next/font/google";
 import "@styles/globals.scss"
 
-const manrope = Manrope({ 
+const golos = Golos_Text({ 
   subsets: ["cyrillic", "latin"],
   preload: true,
-  variable: "--manrope"
+  variable: "--golos"
 });
 
 export const metadata = {
@@ -15,7 +15,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ru">
-      <body className={manrope.variable}>{children}</body>
+      <body className={golos.variable}>{children}</body>
     </html>
   );
 }

@@ -8,6 +8,7 @@ import Image from "next/image";
 export default function UploadForm() {
 
     const [file, setFile] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
 
     const router = useRouter()
     const inputFileRef = useRef(null);
@@ -21,13 +22,17 @@ export default function UploadForm() {
 
     const uploadFile = async (e) => {
         e.preventDefault()
-        
+        setIsLoading(prev => !prev)
         try {
             if (!file) return console.log("Загрузите файл")
 
-            console.log(file)
+            let BASE_URL = "http://localhost:3000"
 
-            await fetch(`https://test-upload-files.vercel.app/api/upload?filename=${file.name}`,
+            if (process.env.VERCEL_ENV === "production") {
+                BASE_URL = "https://test-upload-files.vercel.app"
+            }
+
+            await fetch(`${BASE_URL}/api/upload?filename=${file.name}`,
                 {
                     method: 'POST',
                     body: file,
@@ -38,9 +43,11 @@ export default function UploadForm() {
             )
 
             setFile(null)
+            setIsLoading(false)
             router.refresh()
 
         } catch (e) {
+            setIsLoading(false)
             console.log((e))
         }
     }
@@ -78,7 +85,11 @@ export default function UploadForm() {
                     </p>
                 </div>
             )}
-            <button className="upload-form__button" type="submit">Добавить изображение</button>
+            <button className="upload-form__button" type="submit" disabled={isLoading}>
+                {isLoading ? (
+                    <Image priority src={"/img/UploadForm/loading_out.svg"} alt="Loading" width={30} height={30}/>
+                ) : "Добавить изображение"}
+            </button>
         </form>
     )
 }
