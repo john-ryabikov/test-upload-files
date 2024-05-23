@@ -26,15 +26,15 @@ export default function UploadForm() {
         try {
             if (!file) return console.log("Загрузите файл")
 
-            let BASE_URL = "http://localhost:3000"
+            // let BASE_URL = "http://localhost:3000"
 
-            if (process.env.VERCEL_ENV === "production") {
-                BASE_URL = "https://test-upload-files.vercel.app"
-            }
+            // if (process.env.VERCEL_ENV === "production") {
+            //     BASE_URL = "https://test-upload-files.vercel.app"
+            // }
 
-            console.log(BASE_URL)
+            // console.log(BASE_URL)
 
-            await fetch(`${BASE_URL}/api/upload?filename=${file.name}`,
+            await fetch(`https://test-upload-files.vercel.app/api/upload?filename=${file.name}`,
                 {
                     method: 'POST',
                     body: file,
