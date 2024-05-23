@@ -2,9 +2,12 @@ import Image from "next/image"
 
 export default async function GalleryImages() {
 
-    const images = await fetch("https://test-upload-files.vercel.app/api/images", {
+    const blob = await fetch("https://test-upload-files.vercel.app/api/images", {
         cache: "no-store"
     })
+
+    const images = await blob.json()
+
 
     return (
         <div className="gallery-images">
