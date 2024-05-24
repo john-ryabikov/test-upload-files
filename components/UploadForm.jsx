@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState } from "react"
 
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -11,7 +11,6 @@ export default function UploadForm() {
     const [isLoading, setIsLoading] = useState(false)
 
     const router = useRouter()
-    const inputFileRef = useRef(null);
 
     const changeFile = (e) => {
         if (e.target.files) {
@@ -31,8 +30,6 @@ export default function UploadForm() {
             if (process.env.NEXT_PUBLIC_VERCEL_ENV === "production") {
                 BASE_URL = "https://test-upload-files.vercel.app"
             }
-
-            console.log(BASE_URL)
 
             await fetch(`${BASE_URL}/api/upload?filename=${file.name}`,
                 {
@@ -63,12 +60,11 @@ export default function UploadForm() {
         <form className="upload-form" onSubmit={uploadFile}>
             <div className="upload-form__label">
                 <div className="upload-form__label-img">
-                    <Image priority src={"/img/UploadForm/file_upload_icon.svg"} width={30} height={50} alt="Upload Image"/>
+                    <Image priority src={"/img/UploadForm/file_upload_icon.svg"} width={42} height={60} alt="Upload Image"/>
                 </div>
                 <p className="upload-form__label-text">Загрузите изображение</p>
                 <input 
                     className="upload-form__input"
-                    ref={inputFileRef} 
                     type="file" 
                     name="image"
                     accept="image/*"
@@ -83,7 +79,7 @@ export default function UploadForm() {
                         <span>{Math.floor((file.size / 1024 / 1000) * 100) / 100 } MB</span>
                     </p>
                     <p className="upload-form__list-delete" onClick={deleteFile}>
-                        <img priority src={"/img/UploadForm/delete_icon.svg"} width={30} height={30} alt="X"/>
+                        <img src={"/img/UploadForm/delete_icon.svg"} alt="X"/>
                     </p>
                 </div>
             )}
