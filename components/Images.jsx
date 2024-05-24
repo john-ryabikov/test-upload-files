@@ -12,6 +12,7 @@ export default async function Images({images}) {
                         <div className="gallery-images__img-cont" key={i}>
                             <span className="gallery-images__img-load"></span>
                             <Image
+                                priority
                                 src={image.url} 
                                 width={300} 
                                 height={240} 
