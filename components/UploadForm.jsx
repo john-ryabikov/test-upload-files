@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -9,6 +9,8 @@ export default function UploadForm() {
 
     const [file, setFile] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
+
+    const inputFile = useRef(null)
 
     const router = useRouter()
 
@@ -41,6 +43,7 @@ export default function UploadForm() {
                 }
             )
 
+            inputFile.current.value = ""
             setFile(null)
             setIsLoading(false)
             router.refresh()
@@ -52,6 +55,7 @@ export default function UploadForm() {
     }
 
     const deleteFile = () => {
+        inputFile.current.value = ""
         setFile(null)
         router.refresh()
     }
@@ -65,6 +69,7 @@ export default function UploadForm() {
                 <p className="upload-form__label-text">Загрузите изображение</p>
                 <input 
                     className="upload-form__input"
+                    ref={inputFile}
                     type="file" 
                     name="image"
                     accept="image/*"
